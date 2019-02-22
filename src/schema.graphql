@@ -1,0 +1,31 @@
+type Query {
+  info(name: String!): ProfileType!
+}
+
+type ProfileType {
+  id: ID!
+  type: String
+  metadata: ProfileMetadata!
+  stats: Stats!
+  latestGames: [LatestGame]
+}
+
+type ProfileMetadata {
+  level: Int
+}
+
+type Kills {
+  value: Int
+  percentile: Int
+}
+
+type Stats {
+  kills: Kills
+}
+
+type LatestGame {
+  id: ID
+  legendName: String
+  icon: String
+  bgImage: String
+}
