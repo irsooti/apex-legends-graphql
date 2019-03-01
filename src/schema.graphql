@@ -2,11 +2,14 @@ type Query {
   info(name: String!): ProfileType!
 }
 
+type Subscription {
+  counter: Counter!
+}
+
 type ProfileType {
   id: ID!
   type: String
   metadata: ProfileMetadata!
-  stats: Stats!
   latestGames: [LatestGame]
 }
 
@@ -28,4 +31,10 @@ type LatestGame {
   legendName: String
   icon: String
   bgImage: String
+  stats: Stats!
+}
+
+type Counter {
+  count: Int!
+  countStr: String
 }
