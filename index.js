@@ -1,17 +1,17 @@
 require('dotenv').load();
-const { useRedis, cacheWithKey } = require('./cache');
+// const { useRedis, cacheWithKey } = require('./cache');
 const { GraphQLServer, PubSub } = require('graphql-yoga');
 const apexClient = require('./api/apexHttpClient');
 
 const resolvers = {
   Query: {
     info: (root, args) =>
-      useRedis(args.name, () =>
+      // useRedis(args.name, () =>
         apexClient
           .get('/profile/5/' + args.name)
           .then(data => data.data)
-          .then(cacheWithKey(args.name, 60000))
-      )
+          // .then(cacheWithKey(args.name, 60000))
+      // )
   },
   ProfileType: {
     metadata: parent => {
