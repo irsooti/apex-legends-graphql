@@ -5,13 +5,14 @@ const apexClient = require('./api/apexHttpClient');
 
 const resolvers = {
   Query: {
-    info: (root, args) =>
+    info: (root, { name, platform }) => {
       // useRedis(args.name, () =>
-        apexClient
-          .get('/profile/5/' + args.name)
-          .then(data => data.data)
-          // .then(cacheWithKey(args.name, 60000))
-      // )
+      return apexClient
+        .get(`/profile/${platform ? platform.value : 5}/${name}`)
+        .then(data => data.data);
+    }
+    // .then(cacheWithKey(args.name, 60000))
+    // )
   },
   ProfileType: {
     metadata: parent => {
@@ -25,6 +26,17 @@ const resolvers = {
         bgImage: child.metadata.bgimage,
         stats: child.stats
       }));
+    }
+  },
+  Platform: {
+    PC: {
+      value: 5
+    },
+    XBOX: {
+      value: 1
+    },
+    PSN: {
+      value: 2
     }
   },
   Stats: {

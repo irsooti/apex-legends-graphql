@@ -1,5 +1,5 @@
 type Query {
-  info(name: String!): ProfileType!
+  info(name: String!, platform: Platform): ProfileType!
 }
 
 type Subscription {
@@ -17,9 +17,15 @@ type ProfileMetadata {
   level: Int
 }
 
+enum Platform {
+  PC
+  PSN
+  XBOX
+}
+
 type Kills {
   value: Int
-  percentile: Int
+  percentile: Float
 }
 
 type Stats {
